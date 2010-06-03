@@ -1,0 +1,2 @@
+content	webtalk	content/
+overlay	chrome://browser/content/browser.xul	chrome://webtalk/content/firefoxOverlay.xul

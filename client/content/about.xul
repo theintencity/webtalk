@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<dialog title="About Web Talk" orient="vertical" autostretch="always" onload="sizeToContent()" 
+	buttons="accept" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <groupbox align="center" orient="horizontal">
+    <vbox>
+      <text value="Web Talk" style="font-weight: bold; font-size: x-large;"/>
+      <text value="Version: 1.0.0"/>
+      <text value="Chat with others browsing the same web site as you"/>
+      <separator class="thin"/>
+      <text value="Created By:" style="font-weight: bold;"/>
+      <text value="Mamta Singh"/>
+      <separator class="thin"/>
+      <text value="Home Page:" style="font-weight: bold;"/>
+      <text value="http://www.cs.usfca.edu/~msingh4/webtalk"
+        class="url"
+        onclick="window.open('http://www.cs.usfca.edu/~msingh4/webtalk'); window.close();"/>
+      <separator class="thin"/>
+    </vbox>
+  </groupbox>
+</dialog>

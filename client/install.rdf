@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>mamtasingh05@gmail.com</em:id>
+    <em:name>Web Talk</em:name>
+    <em:version>1.0.0</em:version>
+    <em:creator>Mamta Singh</em:creator>
+    <em:description>Chat with others browsing the same web site.</em:description>
+    <em:homepageURL>http://www.cs.usfca.edu/~msingh4/webtalk</em:homepageURL>
+    <em:aboutURL>chrome://webtalk/content/about.xul</em:aboutURL>
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
+        <em:minVersion>3.0</em:minVersion>
+        <em:maxVersion>3.6.*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

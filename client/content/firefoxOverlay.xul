@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://webtalk/skin/overlay.css" type="text/css"?>
+<overlay id="webtalk-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- see https://developer.mozilla.org/en/Creating_a_Firefox_sidebar 
+       on how to create Firefox sidebar extensions. -->
+	   
+  <!-- the main javascript defines the webtalk object -->
+  
+  <script src="webtalk.js"/>
+
+  <!-- webtalk.properties defines webtalkURL which is the URL of the web service. -->
+  
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="webtalk-strings" src="chrome://webtalk/content/webtalk.properties"/>
+  </stringbundleset>
+
+  <!-- Three ways to start/stop the side bar: 
+       Menu: View->Sidebar->Web Talk
+       Shortcut key: shift+accel+M
+       Right-click menu: there is an option to Web Talk.
+       
+       Also you can use shift+accel+E to focus on chat input box.
+	     -->
+	   
+  <menupopup id="viewSidebarMenu">
+    <menuitem key="key_openSidebar" observes="viewWebTalkSidebar" />
+  </menupopup>
+
+  <keyset id="mainKeyset">
+    <key id="key_openSidebar" command="viewWebTalkSidebar"
+         key="M" modifiers="shift accel" />
+    <key id="key_focusWebTalkChatInput" oncommand="webtalk.focusChatInput()"
+         key="E" modifiers="shift accel" />
+  </keyset>
+
+  <popup id="contentAreaContextMenu">
+    <menuitem insertafter="context-stop" key="key_openSidebar" observes="viewWebTalkSidebar"/>
+  </popup>
+
+  <broadcasterset id="mainBroadcasterSet"> 
+    <broadcaster id="viewWebTalkSidebar" label="Web Talk" autoCheck="false" type="checkbox"
+      group="sidebar" checked="false" sidebarurl="chrome://webtalk/content/sidebar.xul"
+      sidebartitle="Web Talk"
+      oncommand="toggleSidebar('viewWebTalkSidebar'); window.setTimeout(function() { webtalk.onToggleSidebar(); }, 200)" />
+  </broadcasterset>
+
+</overlay>

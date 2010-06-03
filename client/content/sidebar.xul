@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+
+<page id="sb-webtalk-sidebar" title="Web Talk"
+         style="-moz-appearance: none; background-color: white;"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+
+  <!-- see http://stackoverflow.com/questions/145770/firefox-sidebar-and-document-object-of-dom 
+       on how to get main window reference in extension -->
+  
+  <script>
+     function getMainWindow() {
+        var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIWebNavigation)
+                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                   .rootTreeItem
+                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIDOMWindow); 
+        return mainWindow;
+     }
+     
+     function keyPressed(e) {
+       if (e.keyCode == 13) {
+          var input = document.getElementById("input");
+          var text = input.value;
+          if (text != "") {
+            setTimeout(function() { input.value = ""; }, 0);
+            getMainWindow().webtalk.postChatHistory(text);
+            setTimeout(function() { getMainWindow().webtalk.loadChatHistory(); }, 100);
+          }
+        }
+     }
+     
+  </script>
+
+  <!-- The top-level chat input box and my name link -->
+  
+  <hbox>
+    <label value="Enter message:" control="input"
+      style="font-weight: bold; font-style: italic;"/>
+    <label id="mynameText" class="text-link"
+      style="color: #808080" tooltiptext="Click to edit your screen name" 
+      onclick="getMainWindow().webtalk.changeMyName()"/>
+  </hbox>
+  
+  <textbox id="input" rows="1" multiline="true" onkeypress="keyPressed(event);"/>
+  
+  <!-- the chat history area -->
+  
+  <label value="Chat history (recent first):" control="chathistory"
+    style="font-weight: bold; font-style: italic;"/>
+  
+  <textbox id="chathistory" flex="2" multiline="true" readonly="true" 
+    style="-moz-appearance: none; border: none; background-color: white; color: #808080;"/>
+
+  <!-- the user list area -->
+  
+  <label value="People on this site:" control="userlist"
+    style="font-weight: bold; font-style: italic;"/>
+  
+  <textbox id="userlist" flex="1" multiline="true" disabled="true"
+    style="-moz-appearance: none; border: none; background-color: white; color: #808080;"/>
+
+  <!-- the bottom links for refresh, feedback and help -->
+  
+  <hbox>
+    <label value="refresh" control="input" class="text-link"
+      style="color: #808080" tooltiptext="Refresh chat history and people list"
+      onclick="getMainWindow().webtalk.refresh()"/>
+    <label value="feedback" class="text-link"
+      style="color: #808080" tooltiptext="Send feedback to author by email"
+      onclick="getMainWindow().webtalk.feedback()"/>
+    <label value="help" class="text-link"
+      style="color: #808080" tooltiptext="Open web talk help page"
+      onclick="getMainWindow().webtalk.help()"/>
+  </hbox>
+  
+</page>
