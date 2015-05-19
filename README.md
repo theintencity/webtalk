@@ -22,172 +22,179 @@ manual for using the application.
 
 ### Installation ###
 
-1. **Start the web service:** For demonstration you can start it on local host, but for 
-real deployment you will need a dedicated server machine. Theserver software is packaged in 
-a jar file and needs Java 1.6 to launch as follows.
-```
-$ cd server                # go to the server sub-directory
-$ cat webtalk.properties   # edit if needed using any editor
-$ java -cp webtalk-server.jar WebTalkServer
-```
-Once you launch the server, it starts the web server listening on default port 8080.  
-Before starting the web server, you may edit the `webtalk.properties` file to change 
-the configuration parameters such as port number, maximum sizes of user list and chat 
-history per chat room, expiration duration for user data and list of domains for which 
-the chat room is on per-page basis or disallowed. The configuration file has more
-documentation on these parameters. Once the web server is launched, it reads the 
-configuration and serves any static content from the `download` sub-directory.
+1.  **Start the web service:** For demonstration you can start it on local host, but for 
+    real deployment you will need a dedicated server machine. Theserver software is packaged in 
+    a jar file and needs Java 1.6 to launch as follows.
+    ```
+    $ cd server                # go to the server sub-directory
+    $ cat webtalk.properties   # edit if needed using any editor
+    $ java -cp webtalk-server.jar WebTalkServer
+    ```
 
-2. **Create the Firefox extension:** This step is needed only if you are accessing the 
-server from non-local host. The software also contains the `webtalk.xpi` extension file 
-in the `download` directory assuming that you are running the web service on local host. 
-If you plan to access the web service from actual hostname or IP address you will need 
-to re-compile the extension with the web service host name and put it in the `download` 
-directory. First, edit the hostname in client's properties file, then build the client 
-and copy it to server directory.
-```
-$ cd client                 # go to the client sub-directory
-$ cat webtalk.properties    # edit if needed using any editor
-webtalkURL=http://localhost:8080/api
-$ ./build.sh                # build the firefox extension
-$ cd ..
-$ cp webtalk.xpi server/download/webtalk.xpi
-```
+    Once you launch the server, it starts the web server listening on default port 8080.  
+    Before starting the web server, you may edit the `webtalk.properties` file to change 
+    the configuration parameters such as port number, maximum sizes of user list and chat 
+    history per chat room, expiration duration for user data and list of domains for which 
+    the chat room is on per-page basis or disallowed. The configuration file has more
+    documentation on these parameters. Once the web server is launched, it reads the 
+    configuration and serves any static content from the `download` sub-directory.
 
-I will describe later how you can dynamically change the web service host name in the 
-client if needed.
+2.  **Create the Firefox extension:** This step is needed only if you are accessing the 
+    server from non-local host. The software also contains the `webtalk.xpi` extension file 
+    in the `download` directory assuming that you are running the web service on local host. 
+    If you plan to access the web service from actual hostname or IP address you will need 
+    to re-compile the extension with the web service host name and put it in the `download` 
+    directory. First, edit the hostname in client's properties file, then build the client 
+    and copy it to server directory.
+    ```
+    $ cd client                 # go to the client sub-directory
+    $ cat webtalk.properties    # edit if needed using any editor
+    webtalkURL=http://localhost:8080/api
+    $ ./build.sh                # build the firefox extension
+    $ cd ..
+    $ cp webtalk.xpi server/download/webtalk.xpi
+    ```
 
-3. **Install the Firefox extension:** You can download and install the Firefox 
-extension `webtalk.xpi` in your browser as the client side of the application. If you 
-are accessing the web service on a remote machine, open this help page on your remote 
-machine using the URL http://your-server-host:8080/download so that correct extension
-file is served, and then click on the link below to install the extension.
-[webtalk.xpi Install Firefox Extension (Click here in your Firefox browser)]
-For demonstration purpose you can create multiple profiles in Firefox, install this 
-extension in each profile, and then communicate among different Firefox instances 
-launched with different profiles. You can launch Firefox with profile manager using 
-`-ProfileManager` command line option. On Mac OS X:
-```
-$ /Applications/Firefox.app/Contents/MacOS/firefox-bin -ProfileManager
-```
+    I will describe later how you can dynamically change the web service host name in the 
+    client if needed.
 
-4. **Launch Firefox and use webtalk:** After insalling a new extension, and restarting 
-your Firefox browser instance(s), you can enable the `webtalk` extension, and see and 
-chat with other people browsing the same web site as you. After installing the webtalk 
-extension, the first time you launch your Firefox browser, you will be notified of the 
-new extension. Just close that window and proceed with your browsing. See the user manual 
-below for more details on how to use the client extension.
+3.  **Install the Firefox extension:** You can download and install the Firefox 
+    extension `webtalk.xpi` in your browser as the client side of the application. If you 
+    are accessing the web service on a remote machine, open this help page on your remote 
+    machine using the URL http://your-server-host:8080/download so that correct extension
+    file is served, and then click on the link below to install the extension.
+    [webtalk.xpi Install Firefox Extension (Click here in your Firefox browser)]
+    For demonstration purpose you can create multiple profiles in Firefox, install this 
+    extension in each profile, and then communicate among different Firefox instances 
+    launched with different profiles. You can launch Firefox with profile manager using 
+    `-ProfileManager` command line option. On Mac OS X:
+    ```
+    $ /Applications/Firefox.app/Contents/MacOS/firefox-bin -ProfileManager
+    ```
+
+4.  **Launch Firefox and use webtalk:** After insalling a new extension, and restarting 
+    your Firefox browser instance(s), you can enable the `webtalk` extension, and see and 
+    chat with other people browsing the same web site as you. After installing the webtalk 
+    extension, the first time you launch your Firefox browser, you will be notified of the 
+    new extension. Just close that window and proceed with your browsing. See the user manual 
+    below for more details on how to use the client extension.
 
 ### User Manual ###
 
-1. **Open or close webtalk sidebar:** The webtalk extension in your browser can be 
-opened or closed using three methods: in the "View->Sidebar->Web Talk" menu option, 
-the shift-command-M short-cut key combination, and right-click context menu's "Web Talk" 
-option. Additionally, you can click on the close button of the webtalk sidebar to close 
-it. The webtalk sidebar looks like the following:
+1.  **Open or close webtalk sidebar:** The webtalk extension in your browser can be 
+    opened or closed using three methods: in the "View->Sidebar->Web Talk" menu option, 
+    the shift-command-M short-cut key combination, and right-click context menu's "Web Talk" 
+    option. Additionally, you can click on the close button of the webtalk sidebar to close 
+    it. The webtalk sidebar looks like the following:
 
-<img src='/server/download/webtalk1.png' width='400' />
+    <img src='/server/download/webtalk1.png' width='400' />
 
-If the webtalk sidebar is opened, it will join the chat room for the web site you are 
-browsing. You can see the chat history and user list for the chat room. You can also 
-send chat messages.
+    If the webtalk sidebar is opened, it will join the chat room for the web site you are 
+    browsing. You can see the chat history and user list for the chat room. You can also 
+    send chat messages.
 
-2. **Setting your screen name:** You can click on your screen name or `Set My Name` 
-link on the top of the sidebar. You are required to set your screen name before you 
-can send any chat messages. You can enter your new screen name in the dialog prompt 
-as shown below.
+2.  **Setting your screen name:** You can click on your screen name or `Set My Name` 
+    link on the top of the sidebar. You are required to set your screen name before you 
+    can send any chat messages. You can enter your new screen name in the dialog prompt 
+    as shown below.
 
-<img src='/server/download/webtalk2.png' width='200' />
+    <img src='/server/download/webtalk2.png' width='200' />
 
-After you change your screen name, the new name is stored in preferences so that next 
-time you launch your browser, it restores your name. After you set your screen name, 
-it also updates the user list for the chat room with your user data so that you can 
-notice your name in the user list of the chat room.
+    After you change your screen name, the new name is stored in preferences so that next 
+    time you launch your browser, it restores your name. After you set your screen name, 
+    it also updates the user list for the chat room with your user data so that you can 
+    notice your name in the user list of the chat room.
 
-3. **Sending chat messages:** You can click on the chat input box or use the shift-command-E 
-short-cut key combination to bring the docus to the chat input box. Then type some text and  press "enter" key. This will send a text message to the chat room you are in. After you send a chat message, your chat history is refreshed immediately so that you can see your chat message. For other people in the same chat room, the chat history is refreshed periodically, so their may be delay of few seconds in seeing your chat message by other people. The following shows screenshot with two people on the chat room, and two chat messages in the chat history.
+3.  **Sending chat messages:** You can click on the chat input box or use the shift-command-E 
+    short-cut key combination to bring the docus to the chat input box. Then type some text
+    and  press "enter" key. This will send a text message to the chat room you are in.
+    After you send a chat message, your chat history is refreshed immediately so that you
+    can see your chat message. For other people in the same chat room, the
+    chat history is refreshed periodically, so their may be delay of few seconds
+    in seeing your chat message by other people. The following shows screenshot 
+    with two people on the chat room, and two chat messages in the chat history.
 
-<img src='/server/download/webtalk3.png' width='150' />
+    <img src='/server/download/webtalk3.png' width='150' />
 
-4. **Understanding chat rooms:** Note that the chat room is specific to the web site 
-you are browsing currently in the current browser tab. If you go to a different web 
-site or open a new tab with new web site, then you will leave the previous chat room 
-and join the new chat room of the new web site. In this case your chat history and 
-user list will be refreshed to that of the new chat room. If you are browse to a new 
-web page within the same web site, then you remain in the same chat room for that 
-web site, and your user list and chat history remains the same.  It is possible by 
-the server to define some web sites to have chat rooms for each page or to disallow 
-a chat room. The default configuration of the server disables the chat room for yahoo 
-mail pages, hence when you visit the yahoo mail site, you will see a note indicating 
-so. Also the youtube web site is configured to have chat room per page instead of 
-global for domain. Hence, when you visit youtube web pages, you will join the chat 
-room for each page and will be able to chat with other users on the same page. All 
-other web sites are configured to have chat room per domain, for example two people 
-browsing any page within `www.usfca.edu` will be able to chat with each other.
+4.  **Understanding chat rooms:** Note that the chat room is specific to the web site 
+    you are browsing currently in the current browser tab. If you go to a different web 
+    site or open a new tab with new web site, then you will leave the previous chat room 
+    and join the new chat room of the new web site. In this case your chat history and 
+    user list will be refreshed to that of the new chat room. If you are browse to a new 
+    web page within the same web site, then you remain in the same chat room for that 
+    web site, and your user list and chat history remains the same.  It is possible by 
+    the server to define some web sites to have chat rooms for each page or to disallow 
+    a chat room. The default configuration of the server disables the chat room for yahoo 
+    mail pages, hence when you visit the yahoo mail site, you will see a note indicating 
+    so. Also the youtube web site is configured to have chat room per page instead of 
+    global for domain. Hence, when you visit youtube web pages, you will join the chat 
+    room for each page and will be able to chat with other users on the same page. All 
+    other web sites are configured to have chat room per domain, for example two people 
+    browsing any page within `www.usfca.edu` will be able to chat with each other.
 
-5. **Understanding chat history:** The chat history is refreshed periodically so 
-that you can see new chat messages posted by others in this chat room. The number 
-of chat messages in the history is limited by default to 30 as configured by the 
-web service. The chat history is in reverse order so that most recent user posts 
-are displayed first. This is similar to the existing blog comments listing on other 
-web sites. However, to avoid confusion in reading multiple comments successively 
-posted by the same user, the successive posts by the same user are listed in forward 
-order.  This avoids confusion in reading paragraph backwards, if an user has an 
-habit of positing small  sentences. To give smooth chat experience, as soon as you 
-send a chat message, your chat history is updated so that your message gets displays 
-in the chat history. You can click on the refresh link on the bottom of the side 
-bar to explicitly refresh the chat history immediately.
+5.  **Understanding chat history:** The chat history is refreshed periodically so 
+    that you can see new chat messages posted by others in this chat room. The number 
+    of chat messages in the history is limited by default to 30 as configured by the 
+    web service. The chat history is in reverse order so that most recent user posts 
+    are displayed first. This is similar to the existing blog comments listing on other 
+    web sites. However, to avoid confusion in reading multiple comments successively 
+    posted by the same user, the successive posts by the same user are listed in forward 
+    order.  This avoids confusion in reading paragraph backwards, if an user has an 
+    habit of positing small  sentences. To give smooth chat experience, as soon as you 
+    send a chat message, your chat history is updated so that your message gets displays 
+    in the chat history. You can click on the refresh link on the bottom of the side 
+    bar to explicitly refresh the chat history immediately.
 
-6. **Understanding user list:** The user list is refreshed periodically so that 
-you can see other users joining or leaving this chat room. The user list is sorted 
-by name and limited in size to 30 by default as configured by the web service. The 
-client uses a  unique randomly generated client-id to associated your screen name 
-with. Even if two different users have the same screen name, the client-id will be 
-different, hence you will see the screen name twice in the user list. When you visit 
-a new web site, your user name is removed from old chat room's user list and added 
-to the new chat room's user list. When you change your screen name the existing 
-name is updated for your client-id in the user list. Sometimes, if the user browser
-crashes or closes without a chance to remove that user data from user list, you will 
-see stale user data in your user list. This will get cleaned up by the server 
-periodically by removing expired user data. Your client periodicaly sends your user 
-data to the server to refresh. You can click on the refresh link on the bottom of 
-the side bar to explicitly refresh the user list immediately.
+6.  **Understanding user list:** The user list is refreshed periodically so that 
+    you can see other users joining or leaving this chat room. The user list is sorted 
+    by name and limited in size to 30 by default as configured by the web service. The 
+    client uses a  unique randomly generated client-id to associated your screen name 
+    with. Even if two different users have the same screen name, the client-id will be 
+    different, hence you will see the screen name twice in the user list. When you visit 
+    a new web site, your user name is removed from old chat room's user list and added 
+    to the new chat room's user list. When you change your screen name the existing 
+    name is updated for your client-id in the user list. Sometimes, if the user browser
+    crashes or closes without a chance to remove that user data from user list, you will 
+    see stale user data in your user list. This will get cleaned up by the server 
+    periodically by removing expired user data. Your client periodicaly sends your user 
+    data to the server to refresh. You can click on the refresh link on the bottom of 
+    the side bar to explicitly refresh the user list immediately.
 
-7. **Sending targetted chat message:** By default, if you send a chat message, it 
-is visible to all users in that chat room. You can send targetted chat messages 
-to a specific user in the user list using the following convention: `@target user:text message`. 
-The following screen shots show the sender, sending a target message, and the receiver 
-after receiving the message.
+7.  **Sending targetted chat message:** By default, if you send a chat message, it 
+    is visible to all users in that chat room. You can send targetted chat messages 
+    to a specific user in the user list using the following convention: `@target user:text message`. 
+    The following screen shots show the sender, sending a target message, and the receiver 
+    after receiving the message.
 
-<table><tr valign='top'><td>
-<img src='/server/download/webtalk4.png' width='150' /></td><td>
-<img src='/server/download/webtalk5.png' width='150' /></td></tr></table>
+    <table><tr valign='top'><td>
+    <img src='/server/download/webtalk4.png' width='150' /></td><td>
+    <img src='/server/download/webtalk5.png' width='150' /></td></tr></table>
 
-Note that the target user is compared as case insensitive, and if multiple users 
-in the user list match the name, the chat request is visible by all those users. 
-If the target user does not exist in the chat room user list, an error message is 
-displayed, so that the sender knows that the message was not viewed.
+    Note that the target user is compared as case insensitive, and if multiple users 
+    in the user list match the name, the chat request is visible by all those users. 
+    If the target user does not exist in the chat room user list, an error message is 
+    displayed, so that the sender knows that the message was not viewed.
 
-8. **Changing client configuration:** The chat input box also allows you to change 
-some configuration items, e.g., refresh interval or the webservice URL. You can 
-enter text of the form `{webtalk.property}` to display the value of the configuration 
-`property` and `{webtalk.property=value}` to set the value. For example, enter the 
-text as `{webtalk.service=http://your-new-server:8080/api}` to change the web service 
-to `your-new-server` host. This feature allows you to use the Firefox extension 
-built for one web service to be used by web service hosted on another server, or 
-to change the default 5 second refresh interval of the client to save your bandwidth.
+8.  **Changing client configuration:** The chat input box also allows you to change 
+    some configuration items, e.g., refresh interval or the webservice URL. You can 
+    enter text of the form `{webtalk.property}` to display the value of the configuration 
+    `property` and `{webtalk.property=value}` to set the value. For example, enter the 
+    text as `{webtalk.service=http://your-new-server:8080/api}` to change the web service 
+    to `your-new-server` host. This feature allows you to use the Firefox extension 
+    built for one web service to be used by web service hosted on another server, or 
+    to change the default 5 second refresh interval of the client to save your bandwidth.
 
-9. **Error notifications:** Any error or notifications are displayed in the text 
-input box. Please see the troubleshooting section for information on errors. The 
-example errors are web service failure if the server is unreachable or not running. 
-Example notifications are failure to send targetted chat message or disabled chat 
-rooms for a web site.
+9.  **Error notifications:** Any error or notifications are displayed in the text 
+    input box. Please see the troubleshooting section for information on errors. The 
+    example errors are web service failure if the server is unreachable or not running. 
+    Example notifications are failure to send targetted chat message or disabled chat 
+    rooms for a web site.
 
-10. **Other user interface components:** To see more information about this extension,
-you can click on "Tools->Add Ons" menu option. Then in the "Extensions" tab, 
-right-click on the "Web Talk" extension to access the "Visit Home Page" and "About 
-Web Talk" menu options. The bottom side-bar links allow you to send email to the 
-author for feedback or open this help page.
+10.  **Other user interface components:** To see more information about this extension,
+    you can click on "Tools->Add Ons" menu option. Then in the "Extensions" tab, 
+    right-click on the "Web Talk" extension to access the "Visit Home Page" and "About 
+    Web Talk" menu options. The bottom side-bar links allow you to send email to the 
+    author for feedback or open this help page.
 
 ## 2. Motivation and Goals ##
 
